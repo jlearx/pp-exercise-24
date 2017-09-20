@@ -5,15 +5,15 @@ Created on Sep 20, 2017
 '''
 
 def getGameBoardSize():
-    length = 0
     width = 0
+    height = 0
     
-    while ((length < 1) and (width < 1)): 
+    while ((width < 1) and (height < 1)): 
         inputStr = ""
         xPos = -1
         
         while (inputStr == ""):
-            inputStr = input("Please enter the game board dimensions as lxw (eg. 3x3): ").strip()
+            inputStr = input("Please enter the game board dimensions as wxh (eg. 3x3): ").strip()
             inputStr = inputStr.lower()
             
             if (len(inputStr) < 3):
@@ -26,12 +26,35 @@ def getGameBoardSize():
                 inputStr = ""                
                 continue
         
-        length = int(inputStr[:xPos])
-        width = int(inputStr[xPos + 1:])
-        return (length,width)
+        width = int(inputStr[:xPos])
+        height = int(inputStr[xPos + 1:])
+        return (width,height)
+
+def printRow(width):
+    for i in range(0,width):
+        print(" ---", end="")
+        
+    print(" ")
+    
+def printCol(width):
+    for i in range(0,width):
+        print("|   ", end="")
+    
+    print("|")
+
+def printGameBoard(size):
+    # size (x,y)
+    width = size[0]
+    height = size[1]
+    
+    for i in range(0,height):
+        printRow(width)
+        printCol(width)
+    
+    printRow(width)
 
 if __name__ == '__main__':
-    # (x,y)
+    # size (x,y)
     size = getGameBoardSize()
-    print(str(size))
+    printGameBoard(size)
     
